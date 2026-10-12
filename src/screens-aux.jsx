@@ -42,7 +42,7 @@ function HomeScreen({ ctx }) {
         </div>
       </div>
 
-      <div className="pad scroll" style={{ flex: 1, paddingTop: 16 }}>
+      <div className="pad" style={{ flex: 1, minHeight: 0, paddingTop: 14, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
         <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', gap: 12 }}>
           <div style={{ minWidth: 0, flex: 1 }}>
             <div style={{ fontSize: 16.5, color: 'var(--text-dim)', fontWeight: 600 }}>{new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}</div>
@@ -63,7 +63,7 @@ function HomeScreen({ ctx }) {
         </div>
 
         {/* big CTA */}
-        <button className="btn btn-primary cta-pay" style={{ marginTop: 26, padding: 34, fontSize: 35, justifyContent: 'space-between', borderRadius: 'var(--r-lg)' }} onClick={startSale}>
+        <button className="btn btn-primary cta-pay" style={{ marginTop: 20, padding: '30px 34px', fontSize: 35, flexShrink: 0, justifyContent: 'space-between', borderRadius: 'var(--r-lg)' }} onClick={startSale}>
           <span className="sheen" />
           <span style={{ display: 'flex', alignItems: 'center', gap: 16, position: 'relative' }}>
             <span className="cta-plus" style={{ width: 52, height: 52, borderRadius: 17, background: 'rgba(255,255,255,0.18)', display: 'grid', placeItems: 'center' }}><Icon.plus style={{ width: 30, height: 30 }} /></span>
@@ -73,18 +73,18 @@ function HomeScreen({ ctx }) {
         </button>
 
         {/* divider */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 12, margin: '30px 0 16px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 12, margin: '22px 0 14px', flexShrink: 0 }}>
           <div style={{ flex: 1, height: 1, background: 'var(--line)' }} />
           <span style={{ fontSize: 11, color: 'var(--text-faint)', fontWeight: 700, letterSpacing: '0.1em', whiteSpace: 'nowrap' }}>OTHER OPTIONS</span>
           <div style={{ flex: 1, height: 1, background: 'var(--line)' }} />
         </div>
 
         {/* square option tiles */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: 10, paddingBottom: 8 }}>
+        <div style={{ flex: 1, minHeight: 0, maxHeight: 404, display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gridAutoRows: 'minmax(0, 1fr)', gap: 10, paddingBottom: 6 }}>
           {actions.map((a) => (
-            <button key={a.id} className="row" style={{ position: 'relative', minWidth: 0, flexDirection: 'column', justifyContent: 'center', gap: 11, padding: '22px 6px 16px', aspectRatio: '1 / 0.94' }} onClick={a.fn}>
+            <button key={a.id} className="row" style={{ position: 'relative', minWidth: 0, minHeight: 0, flexDirection: 'column', justifyContent: 'center', gap: 8, padding: '12px 6px 10px' }} onClick={a.fn}>
               {a.lock && <span className="tile-lock"><Icon.lock style={{ width: 11, height: 11 }} /></span>}
-              <div className="ic" style={{ width: 58, height: 58, background: '#fff', border: 'none' }}>{React.createElement(Icon[a.icon], { style: { width: 38, height: 38 } })}</div>
+              <div className="ic" style={{ width: 54, height: 54, background: '#fff', border: 'none' }}>{React.createElement(Icon[a.icon], { style: { width: 36, height: 36 } })}</div>
               <span style={{ fontSize: 12.5, fontWeight: 700, letterSpacing: '0.04em', textAlign: 'center', maxWidth: '100%' }}>{a.label.toUpperCase()}</span>
             </button>
           ))}

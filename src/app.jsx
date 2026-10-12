@@ -125,7 +125,7 @@ function Device({ name, ctx }) {
 function Prototype({ t, toggleTheme, toggleBattery }) {
   const parseHash = () => { const h = location.hash || ''; if (!h.startsWith('#/')) return { s: null, q: new URLSearchParams() }; const [s, q] = h.slice(2).split('?'); return { s, q: new URLSearchParams(q || '') }; };
   const seed = parseHash().s;
-  const start = window.BP_PARTNER ? 'category' : 'home';
+  const start = window.BP_PARTNER ? 'screensaver' : 'home';
   const [hashBatt, setHashBatt] = useState(() => { const b = parseHash().q.get('batt'); return b ? Number(b) : null; });
   const [screen, setScreen] = useState(seed || start);
   const [hist, setHist] = useState([seed || start]);
@@ -399,7 +399,7 @@ function focusCtx(spec, t) {
    ROOT
    ============================================================ */
 function App() {
-  const [t, setTweak] = useTweaks(window.BP_PARTNER ? { ...TWEAK_DEFAULTS, merchant: window.BP_PARTNER.name } : TWEAK_DEFAULTS);
+  const [t, setTweak] = useTweaks(window.BP_PARTNER ? { ...TWEAK_DEFAULTS, merchant: window.BP_PARTNER.name, lowBattery: false } : TWEAK_DEFAULTS);
   const [mode, setMode] = useState('prototype');
   const [focus, setFocus] = useState(null);
 
