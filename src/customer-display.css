@@ -1,0 +1,250 @@
+/* ============================================================
+   BIG PAY — CUSTOMER-FACING SECOND SCREEN (TOPWISE T6D)
+   Landscape secondary display screensaver.
+   ============================================================ */
+:root {
+  --navy: #0a0f1d;
+  --blue: #18a4e8;
+  --blue-2: #4cc0f7;
+  --green: #2ecc8f;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body {
+  height: 100%;
+  font-family: 'Manrope', system-ui, sans-serif;
+  background: #05070e;
+  color: #fff;
+  -webkit-font-smoothing: antialiased;
+}
+.num { font-family: 'Space Grotesk', monospace; }
+
+/* viewport stage — letterboxes the fixed device on black */
+.stage {
+  position: fixed; inset: 0;
+  display: grid; place-items: center;
+  background: radial-gradient(120% 120% at 50% 0%, #0a1020 0%, #05070e 70%);
+  padding: 24px;
+}
+
+/* the T6D front secondary screen — small wide landscape display */
+.device {
+  position: relative;
+  width: 760px; height: 460px;
+  border-radius: 26px;
+  background: #000;
+  padding: 12px;
+  box-shadow:
+    0 40px 90px -30px rgba(0,0,0,0.85),
+    0 0 0 2px #1a1f2c,
+    0 0 0 11px #0c0e15,
+    0 0 0 12px #23252f;
+}
+.device::after {
+  /* subtle 32° glass sheen nod to the tilted secondary screen */
+  content: ''; position: absolute; inset: 12px; border-radius: 16px;
+  background: linear-gradient(122deg, rgba(255,255,255,0.07) 0%, transparent 32%);
+  pointer-events: none; z-index: 5;
+}
+
+/* the actual screen surface */
+.csaver {
+  position: absolute; inset: 12px; overflow: hidden; border-radius: 16px;
+  color: #fff; cursor: default;
+  background: radial-gradient(125% 120% at 50% 30%, #0d1a3a 0%, #070d1e 54%, #02050d 100%);
+}
+
+/* drifting aurora */
+.csaver-aurora {
+  position: absolute; left: -20%; right: -20%; top: -30%; height: 130%;
+  background:
+    radial-gradient(34% 50% at 24% 36%, rgba(24,164,232,0.55), transparent 70%),
+    radial-gradient(34% 50% at 74% 30%, rgba(76,192,247,0.42), transparent 72%),
+    radial-gradient(40% 56% at 60% 70%, rgba(29,58,112,0.6), transparent 72%);
+  filter: blur(30px);
+  animation: cDrift 15s ease-in-out infinite alternate;
+}
+@keyframes cDrift {
+  0% { transform: translate3d(-5%, -3%, 0) scale(1); opacity: 0.85; }
+  100% { transform: translate3d(5%, 4%, 0) scale(1.16); opacity: 1; }
+}
+
+/* perspective grid floor */
+.csaver-grid {
+  position: absolute; inset: 0; opacity: 0.5;
+  background-image:
+    linear-gradient(rgba(120,180,255,0.16) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(120,180,255,0.16) 1px, transparent 1px);
+  background-size: 38px 38px;
+  mask-image: radial-gradient(circle at 50% 46%, #000 0%, transparent 70%);
+  -webkit-mask-image: radial-gradient(circle at 50% 46%, #000 0%, transparent 70%);
+}
+
+/* concentric pulse rings behind logo */
+.csaver-rings { position: absolute; top: 50%; left: 50%; }
+.csaver-rings span {
+  position: absolute; left: 0; top: 0; width: 230px; height: 230px; border-radius: 50%;
+  border: 1px solid rgba(76,192,247,0.4); transform: translate(-50%, -50%) scale(0.5);
+  animation: cPulse 4.6s ease-out infinite;
+}
+.csaver-rings span:nth-child(2) { animation-delay: 1.5s; }
+.csaver-rings span:nth-child(3) { animation-delay: 3s; }
+@keyframes cPulse {
+  0% { transform: translate(-50%, -50%) scale(0.4); opacity: 0.7; }
+  100% { transform: translate(-50%, -50%) scale(2.1); opacity: 0; }
+}
+
+/* floating particles */
+.csaver-dots { position: absolute; inset: 0; }
+.csaver-dots i {
+  position: absolute; width: 4px; height: 4px; border-radius: 50%;
+  background: rgba(120,200,255,0.7); box-shadow: 0 0 8px rgba(76,192,247,0.8);
+  animation: cFloat 7s ease-in-out infinite;
+}
+@keyframes cFloat {
+  0%, 100% { transform: translateY(0); opacity: 0.25; }
+  50% { transform: translateY(-16px); opacity: 0.9; }
+}
+
+/* center brand lockup */
+.csaver-center {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 18px; text-align: center; padding-bottom: 62px;
+}
+.csaver-logo { animation: cFloatLogo 6s ease-in-out infinite; filter: drop-shadow(0 20px 48px rgba(24,164,232,0.6)); }
+@keyframes cFloatLogo { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+.csaver-word { font-weight: 800; letter-spacing: 0.01em; white-space: nowrap; }
+.csaver-word .b1 { color: #fff; }
+.csaver-word .b2 { color: var(--blue-2); }
+.csaver-tag {
+  font-size: 13px; font-weight: 650; letter-spacing: 0.5em; text-transform: uppercase;
+  color: rgba(255,255,255,0.5); padding-left: 0.5em;
+}
+
+/* top + bottom chrome */
+.csaver-welcome {
+  position: absolute; top: 30px; left: 0; right: 0; text-align: center;
+  font-size: 12px; font-weight: 700; letter-spacing: 0.42em; text-transform: uppercase;
+  color: rgba(255,255,255,0.42); padding-left: 0.42em;
+}
+.csaver-foot {
+  position: absolute; left: 0; right: 0; bottom: 26px;
+  display: flex; align-items: center; justify-content: center; gap: 14px;
+}
+.csaver-merchant { font-size: 15px; font-weight: 750; color: rgba(255,255,255,0.9); white-space: nowrap; }
+.csaver-online { font-size: 11.5px; font-weight: 600; color: rgba(255,255,255,0.5); display: flex; align-items: center; gap: 7px; }
+.csaver-online .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); animation: cBlink 2.4s ease-in-out infinite; }
+.csaver-online .dot.off { background: var(--red); }
+.csaver-sep { width: 4px; height: 4px; border-radius: 50%; background: rgba(255,255,255,0.28); }
+@keyframes cBlink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+/* caption under the device */
+.caption {
+  position: fixed; bottom: 22px; left: 0; right: 0; text-align: center;
+  font-size: 12.5px; color: rgba(255,255,255,0.34); font-weight: 600; letter-spacing: 0.04em;
+}
+
+/* ---- LIGHT VARIANT ---- */
+.csaver.light {
+  color: var(--navy);
+  background: radial-gradient(125% 120% at 50% 28%, #ffffff 0%, #eef3fb 52%, #dce6f5 100%);
+}
+.csaver.light .csaver-aurora {
+  background:
+    radial-gradient(34% 50% at 24% 36%, rgba(24,164,232,0.30), transparent 70%),
+    radial-gradient(34% 50% at 74% 30%, rgba(76,192,247,0.26), transparent 72%),
+    radial-gradient(40% 56% at 60% 70%, rgba(120,170,235,0.30), transparent 72%);
+}
+.csaver.light .csaver-grid {
+  opacity: 0.65;
+  background-image:
+    linear-gradient(rgba(24,90,170,0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(24,90,170,0.12) 1px, transparent 1px);
+}
+.csaver.light .csaver-rings span { border-color: rgba(24,140,220,0.4); }
+.csaver.light .csaver-word .b1 { color: var(--navy); }
+.csaver.light .csaver-tag { color: rgba(20,40,80,0.5); }
+.csaver.light .csaver-welcome { color: rgba(20,40,80,0.4); }
+.csaver.light .csaver-merchant { color: rgba(15,30,60,0.9); }
+.csaver.light .csaver-online { color: rgba(20,40,80,0.55); }
+
+@media (prefers-reduced-motion: reduce) {
+  .csaver-aurora, .csaver-rings span, .csaver-dots i, .csaver-logo, .csaver-online .dot { animation: none; }
+  .cd-badge, .cd-badge svg path, .cd-badge svg line { animation: none; stroke-dashoffset: 0; }
+}
+
+/* ============================================================
+   TRANSACTION STATES (customer-facing)
+   share the .csaver shell + animated background
+   ============================================================ */
+
+/* compact top brand strip + merchant */
+.cd-top {
+  position: absolute; top: 24px; left: 30px; right: 30px; z-index: 3;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.cd-brand { display: flex; align-items: center; gap: 11px; }
+.cd-word { font-weight: 800; font-size: 21px; letter-spacing: 0.01em; }
+.cd-word .b1 { color: #fff; } .cd-word .b2 { color: var(--blue-2); }
+.csaver.light .cd-word .b1 { color: var(--navy); }
+.cd-merchant { font-size: 13px; font-weight: 700; color: rgba(255,255,255,0.55); white-space: nowrap; }
+.csaver.light .cd-merchant { color: rgba(20,40,80,0.55); }
+
+/* centered content column */
+.cd-body {
+  position: absolute; inset: 0; z-index: 3;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; padding: 0 40px;
+}
+.cd-label {
+  font-size: 13px; font-weight: 700; letter-spacing: 0.34em; text-transform: uppercase;
+  color: rgba(255,255,255,0.5); padding-left: 0.34em;
+}
+.csaver.light .cd-label { color: rgba(20,40,80,0.5); }
+.cd-amount { font-weight: 600; font-size: 86px; letter-spacing: -0.02em; line-height: 1; margin-top: 14px; }
+.cd-amount .cur { font-size: 0.5em; font-weight: 600; vertical-align: 0.42em; color: var(--blue-2); margin-right: 4px; }
+.cd-sub { font-size: 18px; color: rgba(255,255,255,0.55); margin-top: 12px; }
+.csaver.light .cd-sub { color: rgba(20,40,80,0.55); }
+.cd-hint {
+  margin-top: 30px; display: inline-flex; align-items: center; gap: 10px;
+  font-size: 14px; font-weight: 650; color: var(--blue-2);
+  padding: 11px 20px; border-radius: 999px;
+  background: rgba(24,164,232,0.12); border: 1px solid rgba(24,164,232,0.28);
+}
+.cd-hint svg { width: 18px; height: 18px; }
+
+/* spinner (processing) */
+.cd-spinner { width: 92px; height: 92px; }
+.cd-spinner .track { fill: none; stroke: rgba(255,255,255,0.12); stroke-width: 6; }
+.csaver.light .cd-spinner .track { stroke: rgba(20,60,120,0.14); }
+.cd-spinner .head { fill: none; stroke: var(--blue); stroke-width: 6; stroke-linecap: round; stroke-dasharray: 150; stroke-dashoffset: 100; transform-origin: center; animation: cdSpin 1.05s linear infinite; }
+@keyframes cdSpin { to { transform: rotate(360deg); } }
+.cd-dots3 { display: flex; gap: 9px; margin-top: 26px; }
+.cd-dots3 i { width: 9px; height: 9px; border-radius: 50%; background: rgba(255,255,255,0.25); animation: cdDot 1.3s ease-in-out infinite; }
+.csaver.light .cd-dots3 i { background: rgba(20,60,120,0.2); }
+.cd-dots3 i:nth-child(2) { animation-delay: 0.2s; } .cd-dots3 i:nth-child(3) { animation-delay: 0.4s; }
+@keyframes cdDot { 0%, 100% { opacity: 0.3; transform: translateY(0); } 50% { opacity: 1; transform: translateY(-5px); background: var(--blue); } }
+
+/* result badges (declined / completed) */
+.cd-badge {
+  width: 124px; height: 124px; border-radius: 50%; display: grid; place-items: center;
+  position: relative;
+}
+.cd-badge svg { width: 60px; height: 60px; }
+.cd-badge { animation: cdBadgePop 0.5s cubic-bezier(0.34,1.56,0.64,1) both; }
+@keyframes cdBadgePop { 0% { transform: scale(0.3); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+.cd-badge svg path, .cd-badge svg line {
+  stroke-dasharray: 60; stroke-dashoffset: 60;
+  animation: cdDraw 0.45s 0.3s ease forwards;
+}
+@keyframes cdDraw { to { stroke-dashoffset: 0; } }
+.cd-badge.ok { background: color-mix(in srgb, var(--green) 18%, transparent); color: var(--green); }
+.cd-badge.ok::before { content: ''; position: absolute; inset: -14px; border-radius: 50%; border: 2px solid color-mix(in srgb, var(--green) 40%, transparent); animation: cdRing 1.8s ease-out infinite; }
+.cd-badge.bad { background: color-mix(in srgb, var(--red) 18%, transparent); color: var(--red); }
+.cd-badge.bad::before { content: ''; position: absolute; inset: -14px; border-radius: 50%; border: 2px solid color-mix(in srgb, var(--red) 38%, transparent); }
+@keyframes cdRing { 0% { transform: scale(0.86); opacity: 0.8; } 100% { transform: scale(1.25); opacity: 0; } }
+.cd-title { font-size: 44px; font-weight: 800; letter-spacing: -0.02em; margin-top: 22px; }
+.cd-result-amt { font-weight: 600; font-size: 30px; margin-top: 6px; color: rgba(255,255,255,0.62); }
+.csaver.light .cd-result-amt { color: rgba(20,40,80,0.6); }
+:root { --red: #f0506b; }
+
